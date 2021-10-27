@@ -9,12 +9,17 @@ const fetchPlanets = async () => {
 };
 
 const Planets = () => {
-  /* useQuery(key,async function to data)
+  /* useQuery(key,async function to data,config)
   setelah fetch data diawal, untuk selanjutnya akan di cache ketika dipanggil
   */
   const { data, isLoading, isError, isSuccess } = useQuery(
     "planets",
-    fetchPlanets
+    fetchPlanets,
+    {
+      staleTime: 0,
+      // cacheTime: 10,
+      onSuccess: () => console.log("Data fetched with no problem"),
+    }
   );
   console.log(data);
   return (
